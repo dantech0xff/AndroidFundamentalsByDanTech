@@ -10,9 +10,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.creative.androidfundamentalsbydantech.R
 import com.creative.androidfundamentalsbydantech.databinding.ActivityMainBinding
+import com.creative.androidfundamentalsbydantech.service.BackgroundService
 
 class MainActivity : AppCompatActivity() {
     private var viewBinding: ActivityMainBinding? = null
+
+    private var bgServiceId: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,6 +32,12 @@ class MainActivity : AppCompatActivity() {
         viewBinding?.textView?.text = "MainActivity Task Id: ${this.taskId}\nInstance Id: ${this.hashCode()}"
     }
 
+
+    private fun startBackgroundService(id: Int) {
+        val intent = Intent(this, BackgroundService::class.java).putExtra("dataField", "data_$id")
+        startService(intent)
+    }
+
     private fun registerClickEvent() {
         viewBinding?.apply {
             startStandardActivityButton.setOnClickListener {
@@ -42,6 +51,13 @@ class MainActivity : AppCompatActivity() {
             }
             startSingleInstanceActivityButton.setOnClickListener {
                 startActivity(Intent(this@MainActivity, SingleInstanceActivity::class.java))
+            }
+
+            startBackgroundServiceButton.setOnClickListener {
+                startBackgroundService(bgServiceId++)
+            }
+            stopBackgroundServiceButton.setOnClickListener {
+                stopService(Intent(this@MainActivity, BackgroundService::class.java))
             }
         }
     }

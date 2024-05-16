@@ -12,26 +12,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidFundamentalsByDanTech"
         tools:targetApi="31">
+        <service
+            android:name=".service.ForegroundService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".service.BackgroundService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".activity.SingleInstanceActivity"
-            android:launchMode="singleInstance"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".activity.SingleTaskActivity"
-            android:launchMode="singleTask"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.SingleTopActivity"
-            android:launchMode="singleTop"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.StandardActivity"
-            android:launchMode="standard"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="standard" />
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="standard"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="standard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

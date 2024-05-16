@@ -36,6 +36,16 @@
                 android:text="Start Single Task Activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/startBackgroundServiceButton"
+                android:text="Start Background Service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/stopBackgroundServiceButton"
+                android:text="Stop Background Service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <TextView
             android:id="@+id/textView"
