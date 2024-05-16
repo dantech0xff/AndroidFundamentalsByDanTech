@@ -1,13 +1,19 @@
 package com.creative.androidfundamentalsbydantech.activity
 
 import android.annotation.SuppressLint
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.IntentFilter
+import android.database.Cursor
 import android.os.Build
 import android.os.Bundle
+import android.provider.Telephony
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -24,6 +30,16 @@ class MainActivity : AppCompatActivity() {
     private var fgServiceId: Int = 1
 
     private val simpleReceiver = SimpleReceiver()
+
+    private val requestSmsPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            val smsList = fetchSmsHistory(contentResolver)
+            Log.d("MainActivity", "SMS List: $smsList")
+            Toast.makeText(this, "Fetched SMS List Size: ${smsList.size}", Toast.LENGTH_LONG).show()
+        } else {
+            Log.d("MainActivity", "SMS Permission denied")
+        }
+    }
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,9 +75,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
-// Unregister for Receiver, put it in onDestroy of Activity
         unregisterReceiver(simpleReceiver)
-
     }
 
     private fun startBackgroundService(id: Int) {
@@ -108,6 +122,40 @@ class MainActivity : AppCompatActivity() {
             broadcastSimpleReceiverButton.setOnClickListener {
                 sendBroadcast(Intent(SimpleReceiver.SIMPLE_ACTION))
             }
+            fetchSmsHistoryButton.setOnClickListener {
+                requestSmsPermission.launch(android.Manifest.permission.READ_SMS)
+            }
         }
+    }
+
+    private fun fetchSmsHistory(contentResolver: ContentResolver): List<String> {
+        val smsList = mutableListOf<String>()
+        val cursor: Cursor? = contentResolver.query(
+            // URI trỏ đến bảng SMS
+            Telephony.Sms.CONTENT_URI,
+            // projection: các column cần lấy ra
+            null,
+            // selection: Điều kiện WHERE
+            null,
+            // selectionArgs: Tham số điều kện Where
+            null,
+            // sortOrder: Sắp xếp thứ tự
+            Telephony.Sms.DATE + " DESC"
+        )
+
+        cursor?.use {
+            val bodyIndex = it.getColumnIndex(Telephony.Sms.BODY)
+            val addressIndex = it.getColumnIndex(Telephony.Sms.ADDRESS)
+            val dateIndex = it.getColumnIndex(Telephony.Sms.DATE)
+
+            while (it.moveToNext()) {
+                val smsBody = it.getString(bodyIndex)
+                val smsAddress = it.getString(addressIndex)
+                val smsDate = it.getLong(dateIndex)
+                smsList.add("SMS from $smsAddress at $smsDate: $smsBody")
+            }
+        }
+
+        return smsList
     }
 }
