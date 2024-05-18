@@ -35,8 +35,12 @@ class SimpleFragment : Fragment() {
     private val handlerThread2 = HandlerThread("HandlerThread2").apply {
         start()
     }
+    private val handlerThread3 = HandlerThread("HandlerThread3").apply {
+        start()
+    }
 
     companion object {
+        var instance: SimpleFragment? = null
         fun newInstance(name: String, message: String): SimpleFragment {
             return SimpleFragment().apply {
                 arguments = Bundle().apply {
@@ -119,6 +123,20 @@ class SimpleFragment : Fragment() {
                 )
                 .addToBackStack("${SimpleClockFragment().hashCode()}")
                 .commit()
+        }
+
+        binding?.buttonSimulateMemoryLeak?.setOnClickListener {
+            // obviously this is a memory leak
+//            instance = this
+            Handler(handlerThread3.looper).post {
+                // simulate memory leak
+                // this is harder to find
+                val fragment = this@SimpleFragment
+                while (true) {
+                    Log.d("SimpleFragment", "Simulate Memory Leak ${System.currentTimeMillis()} $fragment")
+                    Thread.sleep(1000)
+                }
+            }
         }
         Log.d("SimpleFragment", "onViewCreated")
     }

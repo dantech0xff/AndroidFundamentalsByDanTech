@@ -47,6 +47,11 @@
                 android:text="Simple Clock Fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/buttonSimulateMemoryLeak"
+                android:text="Simulate Memory Leak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
