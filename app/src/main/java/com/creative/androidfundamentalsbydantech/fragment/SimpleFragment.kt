@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +21,20 @@ import com.creative.androidfundamentalsbydantech.databinding.FragmentSimpleBindi
  * Copyright © 2024 1010 Creative. All rights reserved.
  */
 
+data class UserData(val name: String, val message: String, var money: Int)
+
 class SimpleFragment : Fragment() {
 
     private var binding: FragmentSimpleBinding? = null
+
+    private var resource1: UserData = (UserData("User1", "Hello From User1", 200))
+    private var resource2: UserData = (UserData("User2", "Hello From User2", 200))
+    private val handlerThread1 = HandlerThread("HandlerThread1").apply {
+        start()
+    }
+    private val handlerThread2 = HandlerThread("HandlerThread2").apply {
+        start()
+    }
 
     companion object {
         fun newInstance(name: String, message: String): SimpleFragment {
@@ -69,6 +82,33 @@ class SimpleFragment : Fragment() {
                 Toast.makeText(requireContext(), "No BackStack Remaining", Toast.LENGTH_SHORT).show()
             }
         }
+        binding?.buttonSimulateDeadlock?.setOnClickListener {
+            val handler1 = Handler(handlerThread1.looper)
+            val handler2 = Handler(handlerThread2.looper)
+            Log.d("SimpleFragment", "resource1 $resource1")
+            Log.d("SimpleFragment", "resource2 $resource2")
+            handler1.post {
+                synchronized(resource1) {
+                    resource1.money -= 100
+                    Log.d("SimpleFragment", "handler1 synchronized resource1 $resource1")
+                    synchronized(resource2) {
+                        resource2.money += 100
+                        Log.d("SimpleFragment", "handler1 synchronized resource2 $resource2")
+                    }
+                }
+            }
+
+            handler2.post {
+                synchronized(resource2) {
+                    resource2.money -= 100
+                    Log.d("SimpleFragment", "handler2 synchronized resource2 $resource2")
+                    synchronized(resource1) {
+                        resource1.money += 100
+                        Log.d("SimpleFragment", "handler2 synchronized resource1 $resource1")
+                    }
+                }
+            }
+        }
         Log.d("SimpleFragment", "onViewCreated")
     }
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -102,6 +142,8 @@ class SimpleFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        handlerThread2.quitSafely()
+        handlerThread1.quitSafely()
         Log.d("SimpleFragment", "onDestroy")
     }
     override fun onDetach() {
