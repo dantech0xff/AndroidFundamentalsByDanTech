@@ -109,6 +109,17 @@ class SimpleFragment : Fragment() {
                 }
             }
         }
+
+        binding?.buttonSimpleClockFragment?.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(
+                    R.id.fragment_container,
+                    SimpleClockFragment.newInstance(),
+                    "${SimpleClockFragment::class.java}-${SimpleClockFragment().hashCode()}"
+                )
+                .addToBackStack("${SimpleClockFragment().hashCode()}")
+                .commit()
+        }
         Log.d("SimpleFragment", "onViewCreated")
     }
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -121,11 +132,11 @@ class SimpleFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        Log.d("SimpleFragment", "onResume")
+        Log.d("SimpleFragment", "onResume ${this.hashCode()}")
     }
     override fun onPause() {
         super.onPause()
-        Log.d("SimpleFragment", "onPause")
+        Log.d("SimpleFragment", "onPause ${this.hashCode()}")
     }
     override fun onStop() {
         super.onStop()

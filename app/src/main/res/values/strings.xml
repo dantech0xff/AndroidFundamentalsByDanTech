@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android Fundamentals By Dan Tech</string>
+    <string name="pop_backstack">Pop Backstack</string>
+    <string name="fragment_simple_clock">Fragment Simple Clock</string>
 </resources>
