@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
         viewBinding?.textView?.text = "MainActivity Task Id: ${this.taskId}\nInstance Id: ${this.hashCode()}"
 
-
         // Register for Receiver, put it in onCreate of Activity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(simpleReceiver, IntentFilter().apply {
@@ -124,6 +123,9 @@ class MainActivity : AppCompatActivity() {
             }
             fetchSmsHistoryButton.setOnClickListener {
                 requestSmsPermission.launch(android.Manifest.permission.READ_SMS)
+            }
+            launchFragmentButton.setOnClickListener {
+                startActivity(Intent(this@MainActivity, FragmentActivity::class.java))
             }
         }
     }
