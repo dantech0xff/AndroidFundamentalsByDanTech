@@ -7,10 +7,11 @@ import android.content.IntentFilter
 import android.database.Cursor
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
+import android.os.Looper
 import android.provider.Telephony
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,6 +25,12 @@ import com.creative.androidfundamentalsbydantech.service.BackgroundService
 import com.creative.androidfundamentalsbydantech.service.ForegroundService
 
 class MainActivity : AppCompatActivity() {
+    private val uiHandler: Handler = Handler(Looper.getMainLooper())
+    private val backgroundHandlerThread = HandlerThread("Background-HandlerThread").apply {
+        start()
+    }
+    private val backgroundHandler: Handler by lazy { Handler(backgroundHandlerThread.looper) }
+
     private var viewBinding: ActivityMainBinding? = null
 
     private var bgServiceId: Int = 0
@@ -38,6 +45,21 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Fetched SMS List Size: ${smsList.size}", Toast.LENGTH_LONG).show()
         } else {
             Log.d("MainActivity", "SMS Permission denied")
+        }
+    }
+
+    private fun runUITask() {
+        uiHandler.post {
+            // Run UI Task
+            Log.d("MainActivity", "Run UI Task ${Thread.currentThread().name}")
+            Toast.makeText(this@MainActivity, "Run UI Task ${Thread.currentThread().name}", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun runBackgroundTask() {
+        backgroundHandler.post {
+            // Run Background Task
+            Log.d("MainActivity", "Run Background Task ${Thread.currentThread().name}")
+            Toast.makeText(this@MainActivity, "Run Background Task ${Thread.currentThread().name}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -75,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
 
         unregisterReceiver(simpleReceiver)
+        backgroundHandlerThread.quitSafely()
     }
 
     private fun startBackgroundService(id: Int) {
@@ -126,6 +149,12 @@ class MainActivity : AppCompatActivity() {
             }
             launchFragmentButton.setOnClickListener {
                 startActivity(Intent(this@MainActivity, FragmentActivity::class.java))
+            }
+            startUiTaskButton.setOnClickListener {
+                runUITask()
+            }
+            startBackgroundTaskButton.setOnClickListener {
+                runBackgroundTask()
             }
         }
     }
