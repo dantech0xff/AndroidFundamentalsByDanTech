@@ -24,6 +24,9 @@
         android:theme="@style/Theme.AndroidFundamentalsByDanTech"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ArchitectureActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.FragmentActivity"
             android:configChanges="orientation|screenSize|screenLayout|locale"
             android:exported="false" />

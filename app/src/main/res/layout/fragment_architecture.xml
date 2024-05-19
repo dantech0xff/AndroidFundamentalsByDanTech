@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="onClickHandler"
+            type="com.creative.androidfundamentalsbydantech.fragment.ArchitectureFragment.OnClickHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/buttonMVCFragment"
+                android:onClick="@{(v) -> onClickHandler.onMVCClick(v)}"
+                android:text="@string/navigate_to_mvc_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/buttonMVPFragment"
+                android:onClick="@{(v) -> onClickHandler.onMVPClick(v)}"
+                android:text="@string/navigate_to_mvp_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/buttonMVVMFragment"
+                android:onClick="@{(v) -> onClickHandler.onMVVMClick(v)}"
+                android:text="@string/navigate_to_mvvm_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

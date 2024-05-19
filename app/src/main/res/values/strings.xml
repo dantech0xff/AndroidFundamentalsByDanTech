@@ -2,4 +2,7 @@
     <string name="app_name">Android Fundamentals By Dan Tech</string>
     <string name="pop_backstack">Pop Backstack</string>
     <string name="fragment_simple_clock">Fragment Simple Clock</string>
+    <string name="navigate_to_mvc_fragment">Navigate to MVC Fragment</string>
+    <string name="navigate_to_mvp_fragment">Navigate to MVP Fragment</string>
+    <string name="navigate_to_mvvm_fragment">Navigate to MVVM Fragment</string>
 </resources>
