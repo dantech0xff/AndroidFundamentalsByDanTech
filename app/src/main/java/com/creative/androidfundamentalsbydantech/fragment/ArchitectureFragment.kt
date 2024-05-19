@@ -10,6 +10,7 @@ import com.creative.androidfundamentalsbydantech.R
 import com.creative.androidfundamentalsbydantech.databinding.FragmentArchitectureBinding
 import com.creative.androidfundamentalsbydantech.fragment.mvc.SimpleMVCFragment
 import com.creative.androidfundamentalsbydantech.fragment.mvp.SimpleMVPFragment
+import com.creative.androidfundamentalsbydantech.fragment.mvvm.SimpleMVVMFragment
 
 /**
  * Created by dan on 19/5/24
@@ -48,13 +49,13 @@ class ArchitectureFragment : Fragment() {
 
             override fun onMVVMClick(v: View) {
                 Log.d("ArchitectureFragment", "onMVVMClick")
-//                parentFragmentManager.beginTransaction()
-//                    .add(
-//                        R.id.fragment_container,
-//                        SimpleMVCFragment.newInstance(), SimpleMVCFragment::class.java.name
-//                    )
-//                    .addToBackStack(SimpleMVCFragment::class.java.name)
-//                    .commit()
+                parentFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragment_container,
+                        SimpleMVVMFragment.newInstance(), "${SimpleMVVMFragment::class.java.name}-${System.currentTimeMillis()}"
+                    )
+                    .addToBackStack("${SimpleMVVMFragment::class.java.name}-${System.currentTimeMillis()}")
+                    .commit()
             }
         }
     }
