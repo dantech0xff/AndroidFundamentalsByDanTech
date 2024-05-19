@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.creative.androidfundamentalsbydantech.R
 import com.creative.androidfundamentalsbydantech.databinding.FragmentArchitectureBinding
 import com.creative.androidfundamentalsbydantech.fragment.mvc.SimpleMVCFragment
+import com.creative.androidfundamentalsbydantech.fragment.mvp.SimpleMVPFragment
 
 /**
  * Created by dan on 19/5/24
@@ -36,13 +37,13 @@ class ArchitectureFragment : Fragment() {
 
             override fun onMVPClick(v: View) {
                 Log.d("ArchitectureFragment", "onMVPClick")
-//                parentFragmentManager.beginTransaction()
-//                    .add(
-//                        R.id.fragment_container,
-//                        SimpleMVCFragment.newInstance(), SimpleMVCFragment::class.java.name
-//                    )
-//                    .addToBackStack(SimpleMVCFragment::class.java.name)
-//                    .commit()
+                parentFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragment_container,
+                        SimpleMVPFragment.newInstance(), "${SimpleMVPFragment::class.java.name}-${System.currentTimeMillis()}",
+                    )
+                    .addToBackStack("${SimpleMVPFragment::class.java.name}-${System.currentTimeMillis()}")
+                    .commit()
             }
 
             override fun onMVVMClick(v: View) {

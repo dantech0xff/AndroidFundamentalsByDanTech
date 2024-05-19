@@ -22,4 +22,6 @@
     <string name="start_single_instance_activity">Start Single Instance Activity</string>
     <string name="start_standard_activity">Start Standard Activity</string>
     <string name="hello_world_this_is_main_activity">Hello World, This is Main Activity!</string>
+    <string name="welcome_to_fragment_simple_mvp">Welcome to Fragment Simple MVP</string>
+    <string name="welcome_to_fragment_simple_mvc">Welcome to Fragment Simple MVC</string>
 </resources>

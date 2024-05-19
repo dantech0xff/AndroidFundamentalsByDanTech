@@ -8,13 +8,17 @@ package com.creative.androidfundamentalsbydantech.fragment.mvp
 
 interface SimpleContract {
     interface View {
+        fun setupView()
         fun updateEncryptedText(text: String)
         fun clearInputText()
+        fun showMessage(message: String)
     }
 
     interface Presenter {
         fun encryptData(data: String)
         fun clearData()
+        fun getSnapshotData(): String
+        fun restoreSnapshotData(snapshot: String)
         fun destroy()
     }
 }
