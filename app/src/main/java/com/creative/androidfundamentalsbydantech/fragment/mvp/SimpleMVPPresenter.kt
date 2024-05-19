@@ -6,5 +6,19 @@ package com.creative.androidfundamentalsbydantech.fragment.mvp
  * Copyright © 2024 1010 Creative. All rights reserved.
  */
 
-class SimpleMVPPresenter {
+class SimpleMVPPresenter(
+    private val view: SimpleContract.View,
+    private val model: SimpleMVPModel
+) : SimpleContract.Presenter {
+    override fun encryptData(data: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun clearData() {
+        TODO("Not yet implemented")
+    }
+
+    override fun destroy() {
+        TODO("Not yet implemented")
+    }
 }

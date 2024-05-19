@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.creative.androidfundamentalsbydantech.R
 import com.creative.androidfundamentalsbydantech.databinding.FragmentArchitectureBinding
-import com.creative.androidfundamentalsbydantech.databinding.FragmentSimpleBinding
 import com.creative.androidfundamentalsbydantech.fragment.mvc.SimpleMVCFragment
 
 /**
@@ -26,34 +25,35 @@ class ArchitectureFragment : Fragment() {
             override fun onMVCClick(v: View) {
                 Log.d("ArchitectureFragment", "onMVCClick")
                 parentFragmentManager.beginTransaction()
-                    .add(
+                    .replace(
                         R.id.fragment_container,
-                        SimpleMVCFragment.newInstance(), SimpleMVCFragment::class.java.name
+                        SimpleMVCFragment.newInstance(),
+                        "${SimpleMVCFragment::class.java.name}-${System.currentTimeMillis()}"
                     )
-                    .addToBackStack(SimpleMVCFragment::class.java.name)
+                    .addToBackStack("${SimpleMVCFragment::class.java.name}-${System.currentTimeMillis()}")
                     .commit()
             }
 
-            override fun onMVPClick() {
+            override fun onMVPClick(v: View) {
                 Log.d("ArchitectureFragment", "onMVPClick")
-                parentFragmentManager.beginTransaction()
-                    .add(
-                        R.id.fragment_container,
-                        SimpleMVCFragment.newInstance(), SimpleMVCFragment::class.java.name
-                    )
-                    .addToBackStack(SimpleMVCFragment::class.java.name)
-                    .commit()
+//                parentFragmentManager.beginTransaction()
+//                    .add(
+//                        R.id.fragment_container,
+//                        SimpleMVCFragment.newInstance(), SimpleMVCFragment::class.java.name
+//                    )
+//                    .addToBackStack(SimpleMVCFragment::class.java.name)
+//                    .commit()
             }
 
-            override fun onMVVMClick() {
+            override fun onMVVMClick(v: View) {
                 Log.d("ArchitectureFragment", "onMVVMClick")
-                parentFragmentManager.beginTransaction()
-                    .add(
-                        R.id.fragment_container,
-                        SimpleMVCFragment.newInstance(), SimpleMVCFragment::class.java.name
-                    )
-                    .addToBackStack(SimpleMVCFragment::class.java.name)
-                    .commit()
+//                parentFragmentManager.beginTransaction()
+//                    .add(
+//                        R.id.fragment_container,
+//                        SimpleMVCFragment.newInstance(), SimpleMVCFragment::class.java.name
+//                    )
+//                    .addToBackStack(SimpleMVCFragment::class.java.name)
+//                    .commit()
             }
         }
     }
@@ -80,7 +80,7 @@ class ArchitectureFragment : Fragment() {
 
     interface OnClickHandler {
         fun onMVCClick(v: View)
-        fun onMVPClick()
-        fun onMVVMClick()
+        fun onMVPClick(v: View)
+        fun onMVVMClick(v: View)
     }
 }

@@ -8,12 +8,20 @@ import androidx.fragment.app.Fragment
  * Copyright © 2024 1010 Creative. All rights reserved.
  */
 
-class SimpleMVPFragment : Fragment() {
+class SimpleMVPFragment : Fragment(), SimpleContract.View {
     companion object {
         fun newInstance(): SimpleMVPFragment {
             return SimpleMVPFragment().apply {
                 arguments = android.os.Bundle()
             }
         }
+    }
+
+    override fun updateEncryptedText(text: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun clearInputText() {
+        TODO("Not yet implemented")
     }
 }

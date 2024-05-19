@@ -5,4 +5,21 @@
     <string name="navigate_to_mvc_fragment">Navigate to MVC Fragment</string>
     <string name="navigate_to_mvp_fragment">Navigate to MVP Fragment</string>
     <string name="navigate_to_mvvm_fragment">Navigate to MVVM Fragment</string>
+    <string name="submit_encrypt">Submit Encrypt</string>
+    <string name="clear">Clear</string>
+    <string name="launch_architecture_fragment_activity">Launch Architecture Fragment Activity</string>
+    <string name="start_bg_task">Start Bg Task</string>
+    <string name="start_ui_task">Start UI Task</string>
+    <string name="launch_fragment_activity">Launch Fragment Activity</string>
+    <string name="fetch_sms_history">Fetch SMS History</string>
+    <string name="broadcast_simple_receiver">Broadcast Simple Receiver</string>
+    <string name="stop_foreground_service">Stop Foreground Service</string>
+    <string name="start_foreground_service">Start Foreground Service</string>
+    <string name="stop_background_service">Stop Background Service</string>
+    <string name="start_background_service">Start Background Service</string>
+    <string name="start_single_task_activity">Start Single Task Activity</string>
+    <string name="start_single_top_activity">Start Single Top Activity</string>
+    <string name="start_single_instance_activity">Start Single Instance Activity</string>
+    <string name="start_standard_activity">Start Standard Activity</string>
+    <string name="hello_world_this_is_main_activity">Hello World, This is Main Activity!</string>
 </resources>

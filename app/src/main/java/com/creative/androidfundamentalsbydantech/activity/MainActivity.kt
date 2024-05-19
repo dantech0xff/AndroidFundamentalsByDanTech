@@ -89,8 +89,6 @@ class MainActivity : AppCompatActivity() {
                 addAction(SimpleReceiver.SIMPLE_ACTION)
             })
         }
-
-
     }
 
     override fun onDestroy() {
@@ -155,6 +153,9 @@ class MainActivity : AppCompatActivity() {
             }
             startBackgroundTaskButton.setOnClickListener {
                 runBackgroundTask()
+            }
+            launchArchitectureFragmentButton.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ArchitectureActivity::class.java))
             }
         }
     }

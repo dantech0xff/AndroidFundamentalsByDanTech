@@ -18,60 +18,60 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/startStandardActivityButton"
-                android:text="Start Standard Activity"
+                android:text="@string/start_standard_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/startSingleInstanceActivityButton"
-                android:text="Start Single Instance Activity"
+                android:text="@string/start_single_instance_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/startSingleTopActivityButton"
-                android:text="Start Single Top Activity"
+                android:text="@string/start_single_top_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/startSingleTaskActivityButton"
-                android:text="Start Single Task Activity"
+                android:text="@string/start_single_task_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/startBackgroundServiceButton"
-                android:text="Start Background Service"
+                android:text="@string/start_background_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/stopBackgroundServiceButton"
-                android:text="Stop Background Service"
+                android:text="@string/stop_background_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/startForeGroundServiceButton"
-                android:text="Start Foreground Service"
+                android:text="@string/start_foreground_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/stopForegroundServiceButton"
-                android:text="Stop Foreground Service"
+                android:text="@string/stop_foreground_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/broadcastSimpleReceiverButton"
-                android:text="Broadcast Simple Receiver"
+                android:text="@string/broadcast_simple_receiver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/fetchSmsHistoryButton"
-                android:text="Fetch SMS History"
+                android:text="@string/fetch_sms_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/launchFragmentButton"
-                android:text="Launch Fragment Activity"
+                android:text="@string/launch_fragment_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <LinearLayout
@@ -81,17 +81,23 @@
                 android:layout_height="wrap_content">
                 <Button
                     android:id="@+id/startUiTaskButton"
-                    android:text="Start UI Task"
+                    android:text="@string/start_ui_task"
                     android:layout_marginEnd="2dp"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"/>
                 <Button
                     android:id="@+id/startBackgroundTaskButton"
-                    android:text="Start Bg Task"
+                    android:text="@string/start_bg_task"
                     android:layout_marginStart="2dp"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/launchArchitectureFragmentButton"
+                android:text="@string/launch_architecture_fragment_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <TextView
             android:id="@+id/textView"
@@ -100,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Hello World, This is Main Activity!"
+            android:text="@string/hello_world_this_is_main_activity"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

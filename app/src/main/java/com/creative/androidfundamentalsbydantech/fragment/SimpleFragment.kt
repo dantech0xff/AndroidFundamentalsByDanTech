@@ -119,9 +119,9 @@ class SimpleFragment : Fragment() {
                 .replace(
                     R.id.fragment_container,
                     SimpleClockFragment.newInstance(),
-                    "${SimpleClockFragment::class.java}-${SimpleClockFragment().hashCode()}"
+                    "${SimpleClockFragment::class.java}-${System.currentTimeMillis()}"
                 )
-                .addToBackStack("${SimpleClockFragment().hashCode()}")
+                .addToBackStack("${System.currentTimeMillis()}")
                 .commit()
         }
 
