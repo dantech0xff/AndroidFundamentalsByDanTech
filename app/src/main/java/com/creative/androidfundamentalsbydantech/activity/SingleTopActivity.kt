@@ -1,7 +1,9 @@
 package com.creative.androidfundamentalsbydantech.activity
 
+import android.app.ComponentCaller
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -42,5 +44,16 @@ class SingleTopActivity : AppCompatActivity() {
                 startActivity(Intent(this@SingleTopActivity, SingleInstanceActivity::class.java))
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        Log.d("SingleTopActivity", "onNewIntent 1 param")
+    }
+
+    override fun onNewIntent(intent: Intent, caller: ComponentCaller) {
+        super.onNewIntent(intent, caller)
+        Log.d("SingleTopActivity", "onNewIntent 2 params")
+
     }
 }
