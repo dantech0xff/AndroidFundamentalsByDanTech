@@ -25,4 +25,9 @@
     <string name="welcome_to_fragment_simple_mvp">Welcome to Fragment Simple MVP</string>
     <string name="welcome_to_fragment_simple_mvc">Welcome to Fragment Simple MVC</string>
     <string name="welcome_to_fragment_simple_mvvm">Welcome to Fragment Simple MVVM</string>
+    <string name="bg_thread">BG Thread</string>
+    <string name="ui_thread">UI Thread</string>
+    <string name="read_assets">Read Assets</string>
+    <string name="read_file">Read File</string>
+    <string name="write_file">Write File</string>
 </resources>

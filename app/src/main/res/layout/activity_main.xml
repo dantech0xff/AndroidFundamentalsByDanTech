@@ -81,15 +81,35 @@
                 android:layout_height="wrap_content">
                 <Button
                     android:id="@+id/startUiTaskButton"
-                    android:text="@string/start_ui_task"
+                    android:visibility="gone"
+                    android:text="@string/ui_thread"
                     android:layout_marginEnd="2dp"
-                    android:layout_width="180dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"/>
                 <Button
                     android:id="@+id/startBackgroundTaskButton"
-                    android:text="@string/start_bg_task"
+                    android:visibility="gone"
+                    android:text="@string/bg_thread"
                     android:layout_marginStart="2dp"
-                    android:layout_width="180dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/startReadAssets"
+                    android:text="@string/read_assets"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/startWriteFile"
+                    android:text="@string/write_file"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/startReadFile"
+                    android:text="@string/read_file"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 

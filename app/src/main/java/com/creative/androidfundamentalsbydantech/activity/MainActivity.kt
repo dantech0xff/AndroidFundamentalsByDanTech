@@ -18,11 +18,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.creative.androidfundamentalsbydantech.R
 import com.creative.androidfundamentalsbydantech.databinding.ActivityMainBinding
 import com.creative.androidfundamentalsbydantech.receiver.SimpleReceiver
 import com.creative.androidfundamentalsbydantech.service.BackgroundService
 import com.creative.androidfundamentalsbydantech.service.ForegroundService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private val uiHandler: Handler = Handler(Looper.getMainLooper())
@@ -140,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                 stopService(Intent(this@MainActivity, ForegroundService::class.java))
             }
             broadcastSimpleReceiverButton.setOnClickListener {
-                sendBroadcast(Intent(SimpleReceiver.SIMPLE_ACTION))
+                sendBroadcast(Intent(SimpleReceiver.SIMPLE_ACTION).setPackage(packageName))
             }
             fetchSmsHistoryButton.setOnClickListener {
                 requestSmsPermission.launch(android.Manifest.permission.READ_SMS)
@@ -153,6 +157,34 @@ class MainActivity : AppCompatActivity() {
             }
             startBackgroundTaskButton.setOnClickListener {
                 runBackgroundTask()
+            }
+            startReadFile.setOnClickListener {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val file = File(filesDir, "dump_file.txt")
+                    if (!file.exists()) {
+                        file.createNewFile()
+                    }
+                    val lines = file.readLines()
+                    for (l in lines) {
+                        Log.d("MainActivity", "startReadFile Line: $l")
+                    }
+                }
+            }
+
+            startWriteFile.setOnClickListener {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val file = File(filesDir, "dump_file.txt")
+                    if (!file.exists()) {
+                        file.createNewFile()
+                    }
+                    val line = "Hello world! ${System.currentTimeMillis()}\n"
+                    file.appendText(line)
+                    Log.d("MainActivity", "startWriteFile Line: $line")
+                }
+            }
+
+            startReadAssets.setOnClickListener {
+                getFileFromAssets()
             }
             launchArchitectureFragmentButton.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ArchitectureActivity::class.java))
@@ -189,5 +221,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         return smsList
+    }
+
+    fun getFileFromAssets() {
+        lifecycleScope.launch(Dispatchers.IO) {
+//            val inputStream = assets.open("dump_assets.txt")
+//            val size = inputStream.available()
+//            val buffer = ByteArray(size)
+//            inputStream.read(buffer)
+//            val text = String(buffer)
+//            Log.d("MainActivity", "getFileFromAssets: $text")
+//            inputStream.close()
+
+//            val textInputStream = resources.openRawResource(R.raw.res_raw)
+//            val size = textInputStream.available()
+//            val buffer = ByteArray(size)
+//            textInputStream.read(buffer)
+//            val text = String(buffer)
+//            Log.d("MainActivity", "getFileFromResRaw: $text")
+//            textInputStream.close()
+        }
     }
 }
