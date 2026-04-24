@@ -4,14 +4,26 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
 import android.util.Log
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.work.Configuration as WorkConfiguration
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 @HiltAndroidApp
-class MyApplication : Application() {
+class MyApplication : Application(), WorkConfiguration.Provider {
+
+    @Inject lateinit var workerFactory: HiltWorkerFactory
+
+    override val workManagerConfiguration: WorkConfiguration
+        get() = WorkConfiguration.Builder()
+            .setWorkerFactory(workerFactory)
+            .setMinimumLoggingLevel(Log.DEBUG)
+            .build()
+
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "onCreate")

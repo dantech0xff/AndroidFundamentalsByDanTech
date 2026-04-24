@@ -21,6 +21,13 @@ sealed class Destination(val route: String, val title: String) {
     data object RaceCondition : Destination("conc-race", "Race Condition")
     data object MemoryLeak : Destination("conc-leak", "Memory Leak (LeakCanary)")
 
+    // Phase 3 - Data
+    data object Room : Destination("data-room", "Room Database")
+    data object Network : Destination("data-retrofit", "Retrofit + OkHttp")
+    data object Paging : Destination("data-paging", "Paging 3")
+    data object Settings : Destination("data-datastore", "DataStore")
+    data object Work : Destination("data-work", "WorkManager")
+
     data class ComingSoon(val slug: String, val name: String) :
         Destination("coming-soon/$slug", name) {
         companion object {

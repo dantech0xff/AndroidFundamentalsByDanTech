@@ -20,6 +20,11 @@ import com.creative.androidfundamentalsbydantech.ui.concurrency.FlowScreen
 import com.creative.androidfundamentalsbydantech.ui.concurrency.LegacyThreadingScreen
 import com.creative.androidfundamentalsbydantech.ui.concurrency.MemoryLeakScreen
 import com.creative.androidfundamentalsbydantech.ui.concurrency.RaceConditionScreen
+import com.creative.androidfundamentalsbydantech.ui.data.network.NetworkShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.data.paging.PagingShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.data.room.RoomShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.data.settings.SettingsScreen
+import com.creative.androidfundamentalsbydantech.ui.data.work.WorkManagerScreen
 import com.creative.androidfundamentalsbydantech.ui.interop.AndroidViewInteropScreen
 import com.creative.androidfundamentalsbydantech.ui.launchmodes.LaunchModesHubScreen
 
@@ -46,6 +51,12 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         composable(Destination.Deadlock.route) { DeadlockSimulatorScreen(onBack = back) }
         composable(Destination.RaceCondition.route) { RaceConditionScreen(onBack = back) }
         composable(Destination.MemoryLeak.route) { MemoryLeakScreen(onBack = back) }
+
+        composable(Destination.Room.route) { RoomShowcaseScreen(onBack = back) }
+        composable(Destination.Network.route) { NetworkShowcaseScreen(onBack = back) }
+        composable(Destination.Paging.route) { PagingShowcaseScreen(onBack = back) }
+        composable(Destination.Settings.route) { SettingsScreen(onBack = back) }
+        composable(Destination.Work.route) { WorkManagerScreen(onBack = back) }
 
         composable(
             route = Destination.ComingSoon.ROUTE_TEMPLATE,

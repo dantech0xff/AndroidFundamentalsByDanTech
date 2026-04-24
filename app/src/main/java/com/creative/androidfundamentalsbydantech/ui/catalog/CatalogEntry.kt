@@ -67,11 +67,11 @@ object Catalog {
         add(comingSoon("sys-provider", "ContentProvider (expose)", "App-owned Notes provider.", CatalogCategory.System))
 
         // Data
-        add(comingSoon("data-room", "Room Database", "Entities, DAO with Flow, migration.", CatalogCategory.Data))
-        add(comingSoon("data-retrofit", "Retrofit + OkHttp", "Search GitHub repos with states.", CatalogCategory.Data))
-        add(comingSoon("data-paging", "Paging 3", "Infinite list with Paging + Compose.", CatalogCategory.Data))
-        add(comingSoon("data-datastore", "DataStore (Prefs + Proto)", "Persist settings.", CatalogCategory.Data))
-        add(comingSoon("data-work", "WorkManager", "One-time, periodic, constraints.", CatalogCategory.Data))
+        add(live("Room Database", "Entities, DAO with Flow, migration 1→2.", CatalogCategory.Data, Destination.Room))
+        add(live("Retrofit + OkHttp", "Search GitHub with sealed UiState.", CatalogCategory.Data, Destination.Network))
+        add(live("Paging 3", "Paged GitHub search + Compose LazyColumn.", CatalogCategory.Data, Destination.Paging))
+        add(live("DataStore (Preferences)", "Persist theme + username as Flow.", CatalogCategory.Data, Destination.Settings))
+        add(live("WorkManager", "@HiltWorker, one-time + periodic + progress.", CatalogCategory.Data, Destination.Work))
 
         // Files
         add(comingSoon("files-storage", "Storage APIs", "Internal, external, SAF, MediaStore.", CatalogCategory.Files))
