@@ -24,10 +24,11 @@ object Catalog {
     val entries: List<CatalogEntry> = buildList {
         // UI & Compose
         add(comingSoon("compose-basics", "Compose Basics", "Remember, recomposition, Modifier, slots.", CatalogCategory.UiCompose))
-        add(comingSoon("compose-state", "State & Side-Effects", "LaunchedEffect, DisposableEffect, produceState.", CatalogCategory.UiCompose))
-        add(comingSoon("compose-animation", "Animation Showcase", "animate*AsState, AnimatedVisibility, transitions.", CatalogCategory.UiCompose))
-        add(comingSoon("compose-canvas", "Canvas Playground", "Drawing paths, gradients, gesture paint.", CatalogCategory.UiCompose))
-        add(comingSoon("interop-android-view", "AndroidView Interop", "Embed legacy View inside Compose.", CatalogCategory.UiCompose))
+        add(live("State & Remembering", "remember, rememberSaveable, derivedStateOf, CompositionLocal.", CatalogCategory.UiCompose, Destination.ComposeState))
+        add(live("Side-Effects", "LaunchedEffect, DisposableEffect, SideEffect, produceState.", CatalogCategory.UiCompose, Destination.ComposeEffects))
+        add(live("Animation Showcase", "animate*AsState, AnimatedVisibility, transitions, gestures.", CatalogCategory.UiCompose, Destination.Animation))
+        add(live("Canvas Playground", "Paths, gradients, finger paint, particles.", CatalogCategory.UiCompose, Destination.Canvas))
+        add(live("AndroidView Interop", "Embed legacy View inside Compose.", CatalogCategory.UiCompose, Destination.AndroidViewInterop))
 
         // Architecture
         add(comingSoon("arch-mvc", "MVC", "Model–View–Controller", CatalogCategory.Architecture))
@@ -37,13 +38,13 @@ object Catalog {
         add(comingSoon("arch-clean", "Clean Architecture", "Domain / Data / Presentation layering.", CatalogCategory.Architecture))
 
         // Concurrency
-        add(comingSoon("conc-coroutines", "Coroutines", "Structured concurrency, scopes, cancellation.", CatalogCategory.Concurrency))
-        add(comingSoon("conc-flow", "Flow / StateFlow / SharedFlow", "Cold vs hot streams, operators.", CatalogCategory.Concurrency))
-        add(comingSoon("conc-channel", "Channel", "Rendezvous, buffered, actor, produce.", CatalogCategory.Concurrency))
-        add(comingSoon("conc-legacy", "Legacy Threading", "Thread, Handler, HandlerThread, Executor.", CatalogCategory.Concurrency))
-        add(comingSoon("conc-deadlock", "Deadlock Simulator", "Two threads, lock order inversion.", CatalogCategory.Concurrency))
-        add(comingSoon("conc-race", "Race Condition", "Compare var, Atomic, Mutex, synchronized.", CatalogCategory.Concurrency))
-        add(comingSoon("conc-leak", "Memory Leak (LeakCanary)", "Intentional leak, detect with LeakCanary.", CatalogCategory.Concurrency))
+        add(live("Coroutines", "launch/async, withContext, cancellation, SupervisorJob.", CatalogCategory.Concurrency, Destination.Coroutines))
+        add(live("Flow / StateFlow / SharedFlow", "Cold vs hot, debounce / collectLatest / map.", CatalogCategory.Concurrency, Destination.Flow))
+        add(live("Channel", "Rendezvous, buffered, produce.", CatalogCategory.Concurrency, Destination.Channel))
+        add(live("Legacy Threading", "Thread, Handler, HandlerThread, Executor.", CatalogCategory.Concurrency, Destination.LegacyThreading))
+        add(live("Deadlock Simulator", "Two threads, lock order inversion.", CatalogCategory.Concurrency, Destination.Deadlock))
+        add(live("Race Condition", "Compare var, Atomic, Mutex, synchronized.", CatalogCategory.Concurrency, Destination.RaceCondition))
+        add(live("Memory Leak (LeakCanary)", "Intentional leak, detect with LeakCanary.", CatalogCategory.Concurrency, Destination.MemoryLeak))
 
         // Activity & Fragment
         add(
@@ -95,4 +96,16 @@ private fun comingSoon(
     subtitle = subtitle,
     category = category,
     route = Destination.ComingSoon.routeFor(slug),
+)
+
+private fun live(
+    title: String,
+    subtitle: String,
+    category: CatalogCategory,
+    destination: Destination,
+): CatalogEntry = CatalogEntry(
+    title = title,
+    subtitle = subtitle,
+    category = category,
+    route = destination.route,
 )
