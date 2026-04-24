@@ -31,11 +31,11 @@ object Catalog {
         add(live("AndroidView Interop", "Embed legacy View inside Compose.", CatalogCategory.UiCompose, Destination.AndroidViewInterop))
 
         // Architecture
-        add(comingSoon("arch-mvc", "MVC", "Model–View–Controller", CatalogCategory.Architecture))
-        add(comingSoon("arch-mvp", "MVP", "Model–View–Presenter", CatalogCategory.Architecture))
-        add(comingSoon("arch-mvvm", "MVVM", "Model–View–ViewModel", CatalogCategory.Architecture))
-        add(comingSoon("arch-mvi", "MVI", "Intent–State reducer", CatalogCategory.Architecture))
-        add(comingSoon("arch-clean", "Clean Architecture", "Domain / Data / Presentation layering.", CatalogCategory.Architecture))
+        add(live("MVC", "Controller giữ logic + threading; render ngược lại View.", CatalogCategory.Architecture, Destination.ArchMvc))
+        add(live("MVP", "Contract-based: View + Presenter interfaces, attach/detach lifecycle.", CatalogCategory.Architecture, Destination.ArchMvp))
+        add(live("MVVM", "ViewModel + StateFlow, View chỉ observe.", CatalogCategory.Architecture, Destination.ArchMvvm))
+        add(live("MVI", "Unidirectional Intent → Event → Reducer → State.", CatalogCategory.Architecture, Destination.ArchMvi))
+        add(live("Clean Architecture", "Domain / Data / Presentation + UseCases + Hilt @Binds.", CatalogCategory.Architecture, Destination.ArchClean))
 
         // Concurrency
         add(live("Coroutines", "launch/async, withContext, cancellation, SupervisorJob.", CatalogCategory.Concurrency, Destination.Coroutines))

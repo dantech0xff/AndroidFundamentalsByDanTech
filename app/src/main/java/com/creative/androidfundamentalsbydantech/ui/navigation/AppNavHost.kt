@@ -8,6 +8,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.creative.androidfundamentalsbydantech.ui.animation.AnimationShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.arch.clean.presentation.CleanShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.arch.mvc.MvcShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.arch.mvi.MviShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.arch.mvp.MvpShowcaseScreen
+import com.creative.androidfundamentalsbydantech.ui.arch.mvvm.MvvmShowcaseScreen
 import com.creative.androidfundamentalsbydantech.ui.canvas.CanvasPlaygroundScreen
 import com.creative.androidfundamentalsbydantech.ui.catalog.CatalogScreen
 import com.creative.androidfundamentalsbydantech.ui.common.ComingSoonScreen
@@ -57,6 +62,12 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         composable(Destination.Paging.route) { PagingShowcaseScreen(onBack = back) }
         composable(Destination.Settings.route) { SettingsScreen(onBack = back) }
         composable(Destination.Work.route) { WorkManagerScreen(onBack = back) }
+
+        composable(Destination.ArchMvc.route) { MvcShowcaseScreen(onBack = back) }
+        composable(Destination.ArchMvp.route) { MvpShowcaseScreen(onBack = back) }
+        composable(Destination.ArchMvvm.route) { MvvmShowcaseScreen(onBack = back) }
+        composable(Destination.ArchMvi.route) { MviShowcaseScreen(onBack = back) }
+        composable(Destination.ArchClean.route) { CleanShowcaseScreen(onBack = back) }
 
         composable(
             route = Destination.ComingSoon.ROUTE_TEMPLATE,

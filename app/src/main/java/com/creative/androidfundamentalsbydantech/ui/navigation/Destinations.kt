@@ -28,6 +28,13 @@ sealed class Destination(val route: String, val title: String) {
     data object Settings : Destination("data-datastore", "DataStore")
     data object Work : Destination("data-work", "WorkManager")
 
+    // Phase 4 - Architecture
+    data object ArchMvc : Destination("arch-mvc", "MVC")
+    data object ArchMvp : Destination("arch-mvp", "MVP")
+    data object ArchMvvm : Destination("arch-mvvm", "MVVM")
+    data object ArchMvi : Destination("arch-mvi", "MVI")
+    data object ArchClean : Destination("arch-clean", "Clean Architecture")
+
     data class ComingSoon(val slug: String, val name: String) :
         Destination("coming-soon/$slug", name) {
         companion object {
