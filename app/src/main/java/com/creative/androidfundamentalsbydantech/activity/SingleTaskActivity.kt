@@ -1,46 +1,32 @@
 package com.creative.androidfundamentalsbydantech.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.creative.androidfundamentalsbydantech.R
-import com.creative.androidfundamentalsbydantech.databinding.ActivitySingleTaskBinding
+import com.creative.androidfundamentalsbydantech.ui.launchmodes.LaunchModesContent
+import com.creative.androidfundamentalsbydantech.ui.theme.AppTheme
 
-class SingleTaskActivity : AppCompatActivity() {
-    private var viewBinding: ActivitySingleTaskBinding? = null
+class SingleTaskActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        viewBinding = ActivitySingleTaskBinding.inflate(layoutInflater)
-        setContentView(viewBinding!!.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        Log.d(TAG, "onCreate task=$taskId instance=${hashCode()}")
+        setContent {
+            AppTheme {
+                LaunchModesContent(
+                    title = "SingleTask",
+                    subtitle = "android:launchMode=\"singleTask\"",
+                    taskId = taskId,
+                    instanceHash = hashCode(),
+                    onBack = { finish() },
+                )
+            }
         }
-        registerClickEvent()
-        viewBinding?.textView?.text = "SingleTaskActivity Task Id: ${this.taskId}\nInstance Id: ${this.hashCode()}"
     }
 
-    fun registerClickEvent() {
-        viewBinding?.apply {
-            startStandardActivityButton.setOnClickListener {
-                startActivity(Intent(this@SingleTaskActivity, StandardActivity::class.java))
-            }
-            startSingleTopActivityButton.setOnClickListener {
-                startActivity(Intent(this@SingleTaskActivity, SingleTopActivity::class.java))
-            }
-            startSingleTaskActivityButton.setOnClickListener {
-                startActivity(Intent(this@SingleTaskActivity, SingleTaskActivity::class.java))
-            }
-            startSingleInstanceActivityButton.setOnClickListener {
-                startActivity(Intent(this@SingleTaskActivity, SingleInstanceActivity::class.java))
-            }
-        }
+    companion object {
+        private const val TAG = "SingleTaskActivity"
     }
 }

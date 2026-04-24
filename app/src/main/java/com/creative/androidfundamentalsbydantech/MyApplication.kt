@@ -8,38 +8,41 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import dagger.hilt.android.HiltAndroidApp
 
-/**
- * Created by dan on 16/5/24
- *
- * Copyright © 2024 1010 Creative. All rights reserved.
- */
-
+@HiltAndroidApp
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        Log.d("MyApplication", "onCreate")
+        Log.d(TAG, "onCreate")
     }
+
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
-        Log.d("MyApplication", "onTrimMemory")
+        Log.d(TAG, "onTrimMemory level=$level")
     }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        Log.d("MyApplication", "onConfigurationChanged")
+        Log.d(TAG, "onConfigurationChanged")
     }
+
     override fun onLowMemory() {
         super.onLowMemory()
-        Log.d("MyApplication", "onLowMemory")
+        Log.d(TAG, "onLowMemory")
     }
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        Log.d("MyApplication", "attachBaseContext")
-        ProcessLifecycleOwner.get().lifecycle.addObserver(object: LifecycleEventObserver {
+        Log.d(TAG, "attachBaseContext")
+        ProcessLifecycleOwner.get().lifecycle.addObserver(object : LifecycleEventObserver {
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-                Log.d("MyApplication", "onStateChanged - $event")
+                Log.d(TAG, "process lifecycle -> $event")
             }
         })
     }
-}
 
+    companion object {
+        private const val TAG = "MyApplication"
+    }
+}
