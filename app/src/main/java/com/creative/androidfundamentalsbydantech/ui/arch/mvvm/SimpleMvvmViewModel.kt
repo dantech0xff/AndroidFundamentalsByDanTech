@@ -5,13 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.creative.androidfundamentalsbydantech.ui.arch.common.ArchHistoryEntry
 import com.creative.androidfundamentalsbydantech.ui.arch.common.TextTransform
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 data class MvvmState(
     val history: List<ArchHistoryEntry> = emptyList(),
@@ -25,17 +26,19 @@ class SimpleMvvmViewModel @Inject constructor() : ViewModel() {
     val state: StateFlow<MvvmState> = _state.asStateFlow()
 
     fun onEncode(input: String) {
-        _state.value = _state.value.copy(busy = true)
+        _state.update { it.copy(busy = true) }
         viewModelScope.launch {
             val encoded = withContext(Dispatchers.Default) { TextTransform.encode(input) }
-            _state.value = _state.value.copy(
-                history = listOf(ArchHistoryEntry(input, encoded)) + _state.value.history,
-                busy = false,
-            )
+            _state.update { current ->
+                current.copy(
+                    history = listOf(ArchHistoryEntry(input, encoded)) + current.history,
+                    busy = false,
+                )
+            }
         }
     }
 
     fun onClear() {
-        _state.value = _state.value.copy(history = emptyList())
+        _state.update { it.copy(history = emptyList()) }
     }
 }

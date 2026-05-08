@@ -12,7 +12,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.creative.androidfundamentalsbydantech.ui.common.DemoScaffold
@@ -20,36 +19,41 @@ import com.creative.androidfundamentalsbydantech.ui.common.Explanation
 import com.creative.androidfundamentalsbydantech.ui.common.SectionHeader
 
 /**
- * Shared shell for the 5 architecture-pattern demos. Each pattern wires up
- * an encode action + a clear action + a history list — only the plumbing
- * behind those three behaviours differs.
+ * Shared shell for the architecture-pattern demos. Each pattern wires up an
+ * encode action, a clear action, and a history list — only the plumbing behind
+ * those behaviours differs.
  */
 @Composable
 fun PatternScreen(
     title: String,
     tagline: String,
-    input: MutableState<String>,
+    input: String,
+    onInputChange: (String) -> Unit,
     history: List<ArchHistoryEntry>,
     onBack: () -> Unit,
     onEncode: () -> Unit,
     onClear: () -> Unit,
     tradeoffs: List<String>,
+    encodeEnabled: Boolean = true,
+    clearEnabled: Boolean = history.isNotEmpty(),
+    feedback: @Composable (() -> Unit)? = null,
 ) {
     DemoScaffold(title = title, onBack = onBack) {
         SectionHeader("What this pattern is")
         Explanation(tagline)
+        feedback?.invoke()
 
         Card(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
             Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(
-                    value = input.value,
-                    onValueChange = { input.value = it },
+                    value = input,
+                    onValueChange = onInputChange,
                     label = { Text("Plain text") },
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = onEncode) { Text("Encode (Base64)") }
-                    OutlinedButton(onClick = onClear) { Text("Clear history") }
+                    Button(onClick = onEncode, enabled = encodeEnabled) { Text("Encode (Base64)") }
+                    OutlinedButton(onClick = onClear, enabled = clearEnabled) { Text("Clear history") }
                 }
             }
         }
