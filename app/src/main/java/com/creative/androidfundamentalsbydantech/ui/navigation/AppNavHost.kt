@@ -32,12 +32,43 @@ import com.creative.androidfundamentalsbydantech.ui.data.settings.SettingsScreen
 import com.creative.androidfundamentalsbydantech.ui.data.work.WorkManagerScreen
 import com.creative.androidfundamentalsbydantech.ui.interop.AndroidViewInteropScreen
 import com.creative.androidfundamentalsbydantech.ui.launchmodes.LaunchModesHubScreen
+import com.creative.androidfundamentalsbydantech.ui.learning.LabModeScreen
+import com.creative.androidfundamentalsbydantech.ui.learning.LearningPathScreen
+import com.creative.androidfundamentalsbydantech.ui.learning.LessonRoute
+import com.creative.androidfundamentalsbydantech.ui.learning.QuestHomeScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     val back: () -> Unit = { navController.popBackStack() }
 
-    NavHost(navController = navController, startDestination = Destination.Catalog.route) {
+    NavHost(navController = navController, startDestination = Destination.QuestHome.route) {
+        composable(Destination.QuestHome.route) {
+            QuestHomeScreen(
+                onOpenLesson = { lessonId -> navController.navigate(Destination.Lesson.routeFor(lessonId)) },
+                onOpenPath = { navController.navigate(Destination.LearningPath.route) },
+                onOpenLab = { navController.navigate(Destination.LabMode.route) },
+            )
+        }
+        composable(Destination.LearningPath.route) {
+            LearningPathScreen(
+                onBack = back,
+                onOpenLesson = { lessonId -> navController.navigate(Destination.Lesson.routeFor(lessonId)) },
+            )
+        }
+        composable(Destination.LabMode.route) {
+            LabModeScreen(onBack = back, onOpenRoute = { route -> navController.navigate(route) })
+        }
+        composable(
+            route = Destination.Lesson.ROUTE_TEMPLATE,
+            arguments = listOf(navArgument(Destination.Lesson.ARG_LESSON_ID) { type = NavType.StringType }),
+        ) { entry ->
+            val lessonId = entry.arguments?.getString(Destination.Lesson.ARG_LESSON_ID).orEmpty()
+            LessonRoute(
+                lessonId = lessonId,
+                onBack = back,
+                onOpenRoute = { route -> navController.navigate(route) },
+            )
+        }
         composable(Destination.Catalog.route) {
             CatalogScreen(onOpenRoute = { route -> navController.navigate(route) })
         }

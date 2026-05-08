@@ -17,7 +17,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,18 +26,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.creative.androidfundamentalsbydantech.data.local.NoteEntity
-import com.creative.androidfundamentalsbydantech.ui.common.DemoScaffold
 import com.creative.androidfundamentalsbydantech.ui.common.Explanation
 import com.creative.androidfundamentalsbydantech.ui.common.SectionHeader
+import com.creative.androidfundamentalsbydantech.ui.learning.LearningContent
+import com.creative.androidfundamentalsbydantech.ui.learning.LessonScaffold
 
 @Composable
-fun RoomShowcaseScreen(onBack: () -> Unit, vm: RoomViewModel = hiltViewModel()) {
-    val notes by vm.notes.collectAsState()
+fun RoomShowcaseScreen(
+    onBack: () -> Unit,
+    completed: Boolean = false,
+    onComplete: (() -> Unit)? = null,
+    onOpenLab: (() -> Unit)? = null,
+    vm: RoomViewModel = hiltViewModel(),
+) {
+    val notes by vm.notes.collectAsStateWithLifecycle()
     var title by remember { mutableStateOf("") }
     var body by remember { mutableStateOf("") }
+    val lesson = requireNotNull(LearningContent.lessonById(LearningContent.ROOM_PERSISTENCE))
 
-    DemoScaffold(title = "Room Database", onBack = onBack) {
+    LessonScaffold(
+        lesson = lesson,
+        completed = completed,
+        onBack = onBack,
+        onComplete = onComplete,
+        onOpenLab = onOpenLab,
+    ) {
         SectionHeader("Add Note")
         Explanation("Flow-backed DAO — UI thread observes, insert chạy trên coroutine worker.")
 

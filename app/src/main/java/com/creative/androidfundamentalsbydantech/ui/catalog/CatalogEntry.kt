@@ -82,8 +82,10 @@ object Catalog {
         add(comingSoon("test-compose", "Compose UI Tests", "createAndroidComposeRule.", CatalogCategory.Testing))
     }
 
-    fun groupedByCategory(): Map<CatalogCategory, List<CatalogEntry>> =
-        entries.groupBy { it.category }
+    fun groupedByCategory(includeComingSoon: Boolean = true): Map<CatalogCategory, List<CatalogEntry>> =
+        entries
+            .filter { includeComingSoon || !it.route.startsWith("coming-soon/") }
+            .groupBy { it.category }
 }
 
 private fun comingSoon(

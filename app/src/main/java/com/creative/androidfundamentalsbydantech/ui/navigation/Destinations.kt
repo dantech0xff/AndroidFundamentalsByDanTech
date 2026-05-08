@@ -1,6 +1,9 @@
 package com.creative.androidfundamentalsbydantech.ui.navigation
 
 sealed class Destination(val route: String, val title: String) {
+    data object QuestHome : Destination("quest-home", "Android Fundamentals Quest")
+    data object LearningPath : Destination("learning-path", "Learning Path")
+    data object LabMode : Destination("lab-mode", "Lab Mode")
     data object Catalog : Destination("catalog", "Android Skills Showcase")
 
     data object LaunchModes : Destination("launch-modes", "Activity Launch Modes")
@@ -41,6 +44,14 @@ sealed class Destination(val route: String, val title: String) {
             const val ROUTE_TEMPLATE = "coming-soon/{slug}"
             const val ARG_SLUG = "slug"
             fun routeFor(slug: String) = "coming-soon/$slug"
+        }
+    }
+
+    data class Lesson(val lessonId: String) : Destination("lesson/$lessonId", lessonId) {
+        companion object {
+            const val ROUTE_TEMPLATE = "lesson/{lessonId}"
+            const val ARG_LESSON_ID = "lessonId"
+            fun routeFor(lessonId: String) = "lesson/$lessonId"
         }
     }
 }
