@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -40,6 +41,6 @@ class SimpleMviViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun dispatch(event: MviEvent) {
-        _state.value = reduce(_state.value, event)
+        _state.update { current -> reduce(current, event) }
     }
 }

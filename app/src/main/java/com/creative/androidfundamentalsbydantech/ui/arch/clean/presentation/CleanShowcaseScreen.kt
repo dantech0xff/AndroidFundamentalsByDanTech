@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -26,13 +25,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.creative.androidfundamentalsbydantech.ui.common.DemoScaffold
 import com.creative.androidfundamentalsbydantech.ui.common.Explanation
 import com.creative.androidfundamentalsbydantech.ui.common.SectionHeader
 
 @Composable
 fun CleanShowcaseScreen(onBack: () -> Unit, vm: CleanViewModel = hiltViewModel()) {
-    val state by vm.state.collectAsState()
+    val state by vm.state.collectAsStateWithLifecycle()
     var label by remember { mutableStateOf("") }
     var priority by remember { mutableIntStateOf(3) }
 

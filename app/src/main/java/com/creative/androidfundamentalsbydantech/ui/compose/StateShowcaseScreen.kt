@@ -23,15 +23,29 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.creative.androidfundamentalsbydantech.ui.common.DemoScaffold
 import com.creative.androidfundamentalsbydantech.ui.common.Explanation
 import com.creative.androidfundamentalsbydantech.ui.common.SectionHeader
+import com.creative.androidfundamentalsbydantech.ui.learning.LearningContent
+import com.creative.androidfundamentalsbydantech.ui.learning.LessonScaffold
 
 val LocalAccent = compositionLocalOf { "default-accent" }
 
 @Composable
-fun StateShowcaseScreen(onBack: () -> Unit) {
-    DemoScaffold(title = "State & Remembering", onBack = onBack) {
+fun StateShowcaseScreen(
+    onBack: () -> Unit,
+    completed: Boolean = false,
+    onComplete: (() -> Unit)? = null,
+    onOpenLab: (() -> Unit)? = null,
+) {
+    val lesson = requireNotNull(LearningContent.lessonById(LearningContent.COMPOSE_STATE))
+
+    LessonScaffold(
+        lesson = lesson,
+        completed = completed,
+        onBack = onBack,
+        onComplete = onComplete,
+        onOpenLab = onOpenLab,
+    ) {
         SectionHeader("remember vs rememberSaveable")
         Explanation(
             "remember survives recomposition, rememberSaveable also survives " +

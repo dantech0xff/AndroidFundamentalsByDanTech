@@ -1,7 +1,5 @@
 package com.creative.androidfundamentalsbydantech.ui.arch.mvc
 
-import android.os.Handler
-import android.os.Looper
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateListOf
@@ -14,15 +12,12 @@ import com.creative.androidfundamentalsbydantech.ui.arch.common.PatternScreen
 fun MvcShowcaseScreen(onBack: () -> Unit) {
     val history = remember { mutableStateListOf<ArchHistoryEntry>() }
     val model = remember { SimpleMvcModel() }
-    val mainHandler = remember { Handler(Looper.getMainLooper()) }
     val input = remember { mutableStateOf("") }
 
     val controller = remember {
         SimpleMvcController(model) { latest ->
-            mainHandler.post {
-                history.clear()
-                history.addAll(latest)
-            }
+            history.clear()
+            history.addAll(latest)
         }
     }
 
@@ -33,7 +28,8 @@ fun MvcShowcaseScreen(onBack: () -> Unit) {
     PatternScreen(
         title = "MVC",
         tagline = "Controller xử lý logic + thread, ra lệnh cho Model, render ngược lại View.",
-        input = input,
+        input = input.value,
+        onInputChange = { input.value = it },
         history = history,
         onBack = onBack,
         onEncode = { controller.onEncodeClicked(input.value) },

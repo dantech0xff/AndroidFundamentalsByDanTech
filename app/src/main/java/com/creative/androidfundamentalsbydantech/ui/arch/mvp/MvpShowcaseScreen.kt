@@ -41,11 +41,14 @@ fun MvpShowcaseScreen(onBack: () -> Unit) {
         title = if (busy.value) "MVP (busy…)" else "MVP",
         tagline = "View implements Contract.View, Presenter implements Contract.Presenter — " +
             "mỗi bên có interface rõ ràng để mock/test.",
-        input = input,
+        input = input.value,
+        onInputChange = { input.value = it },
         history = history,
         onBack = onBack,
         onEncode = { presenter.onEncode(input.value) },
         onClear = { presenter.onClear() },
+        encodeEnabled = !busy.value,
+        clearEnabled = !busy.value && history.isNotEmpty(),
         tradeoffs = listOf(
             "Rõ ràng hợp đồng giữa View và Presenter — test Presenter dễ.",
             "Hai interface cho mỗi feature: nhiều boilerplate.",
