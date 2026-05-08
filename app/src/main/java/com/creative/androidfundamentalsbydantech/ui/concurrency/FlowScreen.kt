@@ -12,6 +12,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -80,12 +81,13 @@ private fun ColdFlowDemo() {
 @Composable
 private fun StateFlowDemo() {
     val state = remember { MutableStateFlow(0) }
+    val current by state.collectAsState()
     var seen by remember { mutableStateOf(0) }
     LaunchedEffect(Unit) { state.collect { seen = it } }
     Card(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
         Row(modifier = Modifier.padding(12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(onClick = { state.value = state.value + 1 }) { Text("emit") }
-            Text("value=${state.value}  collected=$seen")
+            Text("value=$current  collected=$seen")
         }
     }
 }
