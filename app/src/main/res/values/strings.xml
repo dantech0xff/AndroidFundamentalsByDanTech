@@ -1,33 +1,3 @@
 <resources>
-    <string name="app_name">Android Fundamentals By Dan Tech</string>
-    <string name="pop_backstack">Pop Backstack</string>
-    <string name="fragment_simple_clock">Fragment Simple Clock</string>
-    <string name="navigate_to_mvc_fragment">Navigate to MVC Fragment</string>
-    <string name="navigate_to_mvp_fragment">Navigate to MVP Fragment</string>
-    <string name="navigate_to_mvvm_fragment">Navigate to MVVM Fragment</string>
-    <string name="submit_encrypt">Submit Encrypt</string>
-    <string name="clear">Clear</string>
-    <string name="launch_architecture_fragment_activity">Launch Architecture Fragment Activity</string>
-    <string name="start_bg_task">Start Bg Task</string>
-    <string name="start_ui_task">Start UI Task</string>
-    <string name="launch_fragment_activity">Launch Fragment Activity</string>
-    <string name="fetch_sms_history">Fetch SMS History</string>
-    <string name="broadcast_simple_receiver">Broadcast Simple Receiver</string>
-    <string name="stop_foreground_service">Stop Foreground Service</string>
-    <string name="start_foreground_service">Start Foreground Service</string>
-    <string name="stop_background_service">Stop Background Service</string>
-    <string name="start_background_service">Start Background Service</string>
-    <string name="start_single_task_activity">Start Single Task Activity</string>
-    <string name="start_single_top_activity">Start Single Top Activity</string>
-    <string name="start_single_instance_activity">Start Single Instance Activity</string>
-    <string name="start_standard_activity">Start Standard Activity</string>
-    <string name="hello_world_this_is_main_activity">Hello World, This is Main Activity!</string>
-    <string name="welcome_to_fragment_simple_mvp">Welcome to Fragment Simple MVP</string>
-    <string name="welcome_to_fragment_simple_mvc">Welcome to Fragment Simple MVC</string>
-    <string name="welcome_to_fragment_simple_mvvm">Welcome to Fragment Simple MVVM</string>
-    <string name="bg_thread">BG Thread</string>
-    <string name="ui_thread">UI Thread</string>
-    <string name="read_assets">Read Assets</string>
-    <string name="read_file">Read File</string>
-    <string name="write_file">Write File</string>
+    <string name="app_name">Android Fundamentals Quest</string>
 </resources>
